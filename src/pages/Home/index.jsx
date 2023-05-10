@@ -123,7 +123,7 @@ const Home = () => {
                             Top Categories
                         </h2>
                     </header>
-                    <div className="grid grid-cols-4  md:grid-cols-4 place-items-center gap-2 pt-5 md:pt-0 ">
+                    <div className="grid grid-cols-4  md:grid-cols-4  gap-2 pt-5 md:pt-0 ">
                       <div className="rounded border-2 border-purple-400 flex flex-col items-center relative h-20 w-20 md:h-28 md:w-28">
                         <span className="block bg-purple-400 rounded-b absolute sm:h-2 top-0 sm:-top-0.5"></span>
                         <svg
