@@ -7,7 +7,7 @@ const Navigation = () => {
       {" "}
       <header className="bg-[#DD8888] lg:px-16 px-8  flex flex-wrap items-center py-2 md:py-4 shadow-md max-w-[1920px]">
         <div className="flex-1 flex justify-between items-center">
-          <a href="#" className="text-xl text-black">
+          <a href="#" className="text-xl text-white">
             Nile-Shop
           </a>
         </div>
@@ -23,12 +23,12 @@ const Navigation = () => {
              
               <li>
                 <a className="p-4 py-2 md:py-3 px-0 block" href="#">
-                 <BsFillPersonFill className='text-2xl text-[#975720]'/>
+                 <BsFillPersonFill className='text-2xl text-white'/>
                 </a>
               </li>
               <li>
                 <a className="md:p-4 py-2 md:py-3 px-0 block md:mb-0 mb-2" href="#">
-                 <BsFillCartCheckFill className='text-2xl text-[#975720]'/>
+                 <BsFillCartCheckFill className='text-2xl text-white'/>
                 </a>
               </li>
             </ul>
