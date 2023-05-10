@@ -1,4 +1,5 @@
-import { BsFillPersonFill,BsFillCartCheckFill } from 'react-icons/bs';
+import { BsFillPersonFill } from 'react-icons/bs';
+import { FaHeart } from 'react-icons/fa';
 
 
 const Navigation = () => {
@@ -21,15 +22,21 @@ const Navigation = () => {
           <nav>
             <ul className="flex items-center justify-between text-base text-gray-700 pt-4 md:pt-0">
              
-              <li>
-                <a className="p-4 py-2 md:py-3 px-0 block" href="#">
+              <li className='mr-4 md:mr-0'>
+                <div className="p-4 py-2 md:py-3 px-0 block md:mb-0 mb-2" >
                  <BsFillPersonFill className='text-2xl text-white'/>
-                </a>
+                </div>
               </li>
               <li>
-                <a className="md:p-4 py-2 md:py-3 px-0 block md:mb-0 mb-2" href="#">
-                 <BsFillCartCheckFill className='text-2xl text-white'/>
-                </a>
+              <div className="relative cursor-pointer md:p-4 py-2 md:py-3 px-0  md:mb-0 mb-2">
+              <FaHeart className='text-2xl text-white'/>
+                      <div className="absolute md:-top-0 -top-3 -right-2 md:right-2">
+                        <span className="text-white font-bold text-sm rounded-full ">
+                          0
+                        </span>
+                      </div>
+                    </div>
+              
               </li>
             </ul>
           </nav>
