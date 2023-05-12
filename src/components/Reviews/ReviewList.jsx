@@ -4,7 +4,7 @@ const ReviewList = ({reviews}) => {
     <>
       <div className="  shadow-lg rounded-lg mx-4 md:mx-auto my-10  ">
         <header className="p-3">
-          <h2 className="md:text-3xl text-white text-center"> Reviews </h2>
+          <h2 className="text-xl md:text-3xl text-white text-center"> Reviews </h2>
         </header>
         <div className=" items-start px-4 py-6 ">
          {reviews.map((review)=>(
