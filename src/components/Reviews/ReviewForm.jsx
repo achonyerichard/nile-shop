@@ -3,7 +3,7 @@
 const ReviewForm = ({ filteredData }) => {
   return (
     <>
-      <div className=" p-2 pt-4 rounded shadow-lg">
+      <div className=" p-2 pt-4 rounded shadow-xl">
         <header className="p-3">
           <h2 className="text-xl md:text-3xl text-white text-center">Drop a Review </h2>
         </header>

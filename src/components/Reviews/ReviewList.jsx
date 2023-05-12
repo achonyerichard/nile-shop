@@ -2,7 +2,7 @@
 const ReviewList = ({reviews}) => {
   return (
     <>
-      <div className="  shadow-lg rounded-lg mx-4 md:mx-auto my-10  ">
+      <div className="  shadow-xl rounded-lg mx-4 md:mx-auto my-10  ">
         <header className="p-3">
           <h2 className="text-xl md:text-3xl text-white text-center"> Reviews </h2>
         </header>
