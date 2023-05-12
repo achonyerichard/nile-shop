@@ -146,7 +146,7 @@ const ProductDetails = () => {
              
                   <button className="bg-white text-black md:pl-6 rounded-full w-auto flex items-center">
                     <span className="mr-6">Contact seller via</span>{" "}
-                    <span className="bg-[#25D366] hover:bg-indigo-700 w-[50px] h-[50px] \ flex items-center justify-center rounded-full">
+                    <span className="bg-[#25D366] hover:bg-indigo-700 md:w-[50px] md:h-[50px] w-16 h-16 flex items-center justify-center rounded-full">
                       <FaWhatsapp className="text-white text-2xl" />
                     </span>
                   </button>
