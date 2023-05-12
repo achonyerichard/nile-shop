@@ -29,11 +29,11 @@ body{
   align-items: center;
 }
 
-@media (min-width: 1024px) {
+
   .nav {
-    background:#DD8888;
+    background:#A16161;
   }
-}
+
 
 .nav.active {
   background: #A16161;

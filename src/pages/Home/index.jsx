@@ -33,7 +33,7 @@ const Home = () => {
   return (
     <>
       {" "}
-      <div className="hero-bg flex items-center justify-center text-center md:mt-24">
+      <div className="hero-bg flex items-center justify-center text-center md:mt-24 mt-20">
         <div className="bg-[#975720] bg-opacity-50 w-50 text-white rounded-md w-100 m-5 p-5 sm:m-10 sm:p-10 md:max-w-xl lg:rounded-lg">
           <h1 className="font-bold text-xl mb-2 md:mb-4 md:text-3xl">
             Welcome
