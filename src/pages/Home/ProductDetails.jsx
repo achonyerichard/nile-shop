@@ -6,6 +6,7 @@ import ReviewForm from "../../components/Reviews/ReviewForm";
 import ReviewList from "../../components/Reviews/ReviewList";
 import { ReviewsContext } from "../../contexts/reviews-context";
 import Pagination from "../../components/pagination/Pagination";
+import Footer from "../../components/Footer";
 
 const ProductDetails = () => {
   const { productData } = useContext(ProductsContext);
@@ -164,6 +165,7 @@ const ProductDetails = () => {
           />
         </div>
       </div>
+      <Footer/>
     </>
   );
 };

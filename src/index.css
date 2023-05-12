@@ -16,3 +16,69 @@ body{
   width:100%;
   height:50vh;
 }
+
+/* Navbar Component */
+.nav {
+  /* padding-top: 5px;
+  padding-bottom: 5px; */
+  transition: all 0.5s;
+  z-index: 997;
+  background: transparent;
+  height: 6rem;
+  display: flex;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .nav {
+    background:#DD8888;
+  }
+}
+
+.nav.active {
+  background: #A16161;
+}
+
+.fixedTop {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1030;
+}
+
+.dropdown:hover {
+  transition: 0.5s;
+}
+
+.nav .dropdown ul li {
+  min-width: 200px;
+}
+.nav .dropdown ul a {
+  padding: 10px 20px;
+  font-size: 14px;
+  color: #003651;
+}
+.nav .dropdown ul a i {
+  font-size: 12px;
+}
+.nav .dropdown ul a:hover,
+.nav .dropdown ul .active:hover,
+.nav .dropdown ul li:hover > a {
+  color: #ccdc;
+}
+.nav .dropdown:hover > ul {
+  opacity: 1;
+  top: 100%;
+  visibility: visible;
+}
+.nav .dropdown .dropdown ul {
+  top: 0;
+  left: calc(100% - 30px);
+  visibility: hidden;
+}
+.nav .dropdown .dropdown:hover > ul {
+  opacity: 1;
+  top: 0;
+  left: 100%;
+  visibility: visible;
+}

@@ -5,11 +5,28 @@ import { Link } from "react-router-dom";
 
 const Navigation = () => {
   const [profile, setProfile] = useState(false);
+  const [nav, setNav] = useState(false);
+
+  if (typeof window !== "undefined") {
+    const changeBackground = () => {
+      if (window.scrollY >= 80) {
+        setNav(true);
+      } else {
+        setNav(false);
+      }
+    };
+
+    window.addEventListener("scroll", changeBackground);
+  }
 
   return (
     <>
       {" "}
-      <header className="bg-[#DD8888] lg:px-16 px-8  flex flex-wrap items-center py-2 md:py-4 shadow-md max-w-[1920px]">
+      <nav className={
+        nav
+          ? `top-0 bg-[#DD8888] z-10 nav fixedTop active shadow-lg lg:px-16 px-8  flex flex-wrap items-center py-2 md:py-4 shadow-md max-w-[1920px]`
+          : `nav fixedTop top-0 bg-[#DD8888] z-10 shadow-lg lg:px-16 px-8  flex flex-wrap items-center py-2 md:py-4 shadow-md max-w-[1920px]`
+      }>
         <div className="flex-1 flex justify-between items-center">
           <Link to="/" className="text-xl text-white">
             Nile-Shop
@@ -72,7 +89,7 @@ const Navigation = () => {
             </ul>
           </nav>
         </div>
-      </header>
+      </nav>
     </>
   );
 };

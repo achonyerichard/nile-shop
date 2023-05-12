@@ -4,6 +4,7 @@ import Products from "../../components/products/Products";
 
 import { useContext, useState } from "react";
 import { ProductsContext } from "../../contexts/products-context";
+import Footer from "../../components/Footer";
 
 const Home = () => {
   const { productData } = useContext(ProductsContext);
@@ -200,6 +201,7 @@ const Home = () => {
           </div>
         </div>
       </section>
+      <Footer/>
     </>
   );
 };
