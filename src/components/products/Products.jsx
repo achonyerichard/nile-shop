@@ -23,22 +23,22 @@ const Products = ({products}) => {
               <p className="text-lg font-bold text-black truncate block capitalize">
                {item.product}
               </p>
-              <div className="flex items-center justify-center">
-                <div className="w-1/3">
-                <p className="text-lg font-semibold text-black cursor-auto my-3">
+              <div className="md:flex items-center justify-between space-y-2 md:justify-center">
+                <div className="md:w-1/3">
+                <p className="text-lg font-semibold text-black cursor-auto md:my-3">
                   <span>&#8358;</span>
                  {`${item.price}`}
                 </p>
                 </div>
                 
-                <div className="flex justify-center w-1/3">
+                <div className="flex md:justify-center md:w-1/3">
                   <Link to={`/product/${item.id}`}>
                    <button className="rounded px-2 py-1 text-xs bg-[#DD8888] text-white hover:bg-[#bd5a5a] duration-300">View</button>
                
                   </Link>
                
                 </div>
-                 <div className="ml-auto">
+                 <div className="md:ml-auto md:w-1/3">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="20"

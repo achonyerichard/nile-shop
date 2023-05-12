@@ -11,9 +11,9 @@ const Navigation = () => {
       {" "}
       <header className="bg-[#DD8888] lg:px-16 px-8  flex flex-wrap items-center py-2 md:py-4 shadow-md max-w-[1920px]">
         <div className="flex-1 flex justify-between items-center">
-          <a href="#" className="text-xl text-white">
+          <Link to="/" className="text-xl text-white">
             Nile-Shop
-          </a>
+          </Link>
         </div>
 
         <div className="flex items-center w-auto " id="menu">
