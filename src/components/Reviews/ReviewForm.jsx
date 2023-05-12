@@ -5,11 +5,11 @@ const ReviewForm = ({ filteredData }) => {
     <>
       <div className=" p-2 pt-4 rounded shadow-xl">
         <header className="p-3">
-          <h2 className="text-xl md:text-3xl text-white text-center">Drop a Review </h2>
+          <h2 className="text-xl md:text-3xl text-black text-center">Drop a Review </h2>
         </header>
         <div className="flex ml-3">
           <div>
-            <h1 className="font-medium">{filteredData?.seller}</h1>
+            <h1 className="font-medium text-black">{filteredData?.seller}</h1>
             <p className="text-xs text-gray-500">2 seconds ago</p>
           </div>
         </div>
@@ -24,7 +24,7 @@ const ReviewForm = ({ filteredData }) => {
 
         <div className="flex justify-between mx-3">
           <div>
-            <button className="px-4 py-1 bg-gray-800 text-white rounded font-light hover:bg-gray-700">
+            <button className="px-4 py-1 bg-[#A16161] text-white rounded font-light hover:bg-[#DD8888]">
               Submit
             </button>
           </div>

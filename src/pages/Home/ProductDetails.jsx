@@ -106,12 +106,12 @@ const ProductDetails = () => {
               </div>
             </div>
             <div className="md:flex-1 px-4">
-              <h2 className="mb-2 leading-tight tracking-tight font-bold text-white text-2xl md:text-3xl">
+              <h2 className="mb-2 leading-tight tracking-tight font-bold text-black text-2xl md:text-3xl">
                 {filteredData?.product}
               </h2>
-              <p className="text-gray-300 text-sm">
+              <p className="text-gray-500 text-sm">
                 By{" "}
-                <a href="#" className="text-[#e7e4e4] hover:underline">
+                <a href="#" className="text-gray-800 hover:underline">
                   {filteredData?.seller}
                 </a>
               </p>
@@ -119,8 +119,8 @@ const ProductDetails = () => {
               <div className="flex items-center space-x-4 my-4">
                 <div>
                   <div className="rounded-lg bg-gray-100 flex py-2 px-3">
-                    <span className="text-indigo-400 mr-1 mt-1">&#8358;</span>
-                    <span className="font-bold text-indigo-600 text-3xl">
+                    <span className="text-[#A16161] mr-1 mt-1">&#8358;</span>
+                    <span className="font-bold text-[#A16161] text-3xl">
                       {filteredData?.price}
                     </span>
                   </div>
@@ -131,7 +131,7 @@ const ProductDetails = () => {
           </div> */}
               </div>
 
-              <p className="text-white">
+              <p className="text-gray-800">
                 Lorem ipsum, dolor sit, amet consectetur adipisicing elit. Vitae
                 exercitationem porro saepe ea harum corrupti vero id laudantium
                 enim, libero blanditiis expedita cupiditate a est.
@@ -140,7 +140,7 @@ const ProductDetails = () => {
               <div className="md:flex py-4 space-x-4 space-y-4 md:space-y-0 items-center">
                 <button
                   type="button"
-                  className="h-14 px-6 py-2 w-full md:w-auto font-semibold rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white"
+                  className="h-14 px-6 py-2 w-full md:w-auto font-semibold rounded-xl bg-[#A16161] hover:bg-[#DD8888] text-white"
                 >
                   Add to Wishlist
                 </button>
