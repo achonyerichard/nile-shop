@@ -33,7 +33,7 @@ const Home = () => {
   return (
     <>
       {" "}
-      <div className="hero-bg flex items-center justify-center text-center my-24">
+      <div className="hero-bg flex items-center justify-center text-center md:mt-24">
         <div className="bg-[#975720] bg-opacity-50 w-50 text-white rounded-md w-100 m-5 p-5 sm:m-10 sm:p-10 md:max-w-xl lg:rounded-lg">
           <h1 className="font-bold text-xl mb-2 md:mb-4 md:text-3xl">
             Welcome
@@ -68,7 +68,7 @@ const Home = () => {
       <section className="mb-20">
         <div className="md:px-20 px-4">
           <div className="w-full max-w-[1920px]  mx-auto ">
-            <div className=" md:flex justify-center  lg:gap-4 lg:pt-10 pt-5">
+            <div className=" md:flex justify-center  lg:gap-4 lg:pt-5 pt-5">
               <div
                 className="
                     flex 
@@ -87,9 +87,10 @@ const Home = () => {
                   whitespace-nowrap
                   lg:w-fit lg:max-h-[50px] 
                   lg:h-[50px] border-[1px] 
-                  border-appGray
+                  bg-[#A16161]
+                  text-white
                   lg:grid lg:place-items-center lg:px-[3rem] px-3 text-xl
-                  rounded-full  mx-[8px] hover:bg-appGreen cursor-pointer hover:text-appWhite focus:bg-appGreen
+                  rounded-full  mx-[8px] hover:bg-[#DD8888] cursor-pointer hover:text-appWhite focus:bg-[#DD8888]
                  }`}
                     >
                       {option.name}
