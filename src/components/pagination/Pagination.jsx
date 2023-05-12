@@ -20,7 +20,7 @@ export default function Pagination({
    
     <div className='py-2'>
       <div>
-        <p className='text-sm text-white'>
+        <p className='text-sm text-black'>
           Showing
           <span className='font-medium'>
             {" "}
