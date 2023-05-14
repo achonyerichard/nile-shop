@@ -83,3 +83,7 @@ body{
   left: 100%;
   visibility: visible;
 }
+.login-bg{
+  background-color: #A16161;
+  background-image: linear-gradient(315deg, #A16161 0%, #DD8888 74%);
+}
