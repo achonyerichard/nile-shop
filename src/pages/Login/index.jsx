@@ -13,7 +13,7 @@ const Login = () => {
     <main className="bg-white max-w-lg mx-auto p-8 md:p-12 my-10 rounded-lg shadow-2xl">
         <section>
         <h3 className="font-bold text-2xl text-black">Login</h3>
-            <p className="text-gray-600 pt-2">Sign up with your email and password</p>
+            <p className="text-gray-600 pt-2">Sign up with your email and password.</p>
         </section>
 
         <section className="mt-10">
