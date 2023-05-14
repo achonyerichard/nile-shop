@@ -5,6 +5,7 @@ import Products from "../../components/products/Products";
 import { useContext, useState } from "react";
 import { ProductsContext } from "../../contexts/products-context";
 import Footer from "../../components/Footer";
+import Navigation from "../../components/Navigation";
 
 const Home = () => {
   const { productData } = useContext(ProductsContext);
@@ -32,6 +33,7 @@ const Home = () => {
   ];
   return (
     <>
+    <Navigation/>
       {" "}
       <div className="hero-bg flex items-center justify-center text-center md:mt-24 mt-20">
         <div className="bg-[#975720] bg-opacity-50 w-50 text-white rounded-md w-100 m-5 p-5 sm:m-10 sm:p-10 md:max-w-xl lg:rounded-lg">

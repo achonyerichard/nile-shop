@@ -7,6 +7,7 @@ import ReviewList from "../../components/Reviews/ReviewList";
 import { ReviewsContext } from "../../contexts/reviews-context";
 import Pagination from "../../components/pagination/Pagination";
 import Footer from "../../components/Footer";
+import Navigation from "../../components/Navigation";
 
 const ProductDetails = () => {
   const { productData } = useContext(ProductsContext);
@@ -38,6 +39,7 @@ const ProductDetails = () => {
 
   return (
     <>
+    <Navigation/>
       <div className="py-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center space-x-2 text-gray-400 text-sm">

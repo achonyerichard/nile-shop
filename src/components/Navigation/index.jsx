@@ -54,14 +54,15 @@ const Navigation = () => {
                     aria-labelledby="dropdownMenuButton2"
                   >
                     <li>
-                      <Link
-                        to="/about"
+                      <div
+                        
                         className=" dropdown-item text-lg py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700 hover:bg-gray-100
             "
                         href="#"
                       >
-                        Login/Register
-                      </Link>
+                        <span><Link to="login">Login</Link></span>
+                        /<span><Link to="register">Register</Link></span>
+                      </div>
                     </li>
                     <li>
                       <Link
