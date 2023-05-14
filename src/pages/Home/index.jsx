@@ -68,7 +68,7 @@ const Home = () => {
       <section className="mb-20">
         <div className="md:px-20 px-4">
           <div className="w-full max-w-[1920px]  mx-auto ">
-            <div className=" md:flex justify-center  lg:gap-4 lg:pt-5 pt-5">
+            <div className=" md:flex flex-row justify-center  h-full items-stretch lg:gap-4 lg:pt-5 pt-5">
               <div
                 className="
                     flex 
@@ -99,14 +99,14 @@ const Home = () => {
                 </div>
               </div>
 
-              <div className="   md:w-1/5 bg-white hidden md:block">
-                <div className=" lg:border-gray-200 border lg:h-auto  ">
+              <div className="   md:w-1/5 bg-white hidden md:block  shadow-xl  ">
+                <div className="  h-screen  top-20 sticky">
                   <header className="py-2">
                     <h2 className="text-2xl font-semibold text-center text-black ">
                       Categories
                     </h2>
                   </header>
-                  <div className="flex justify-center">
+                  <div className="flex justify-center h-72">
                     <CategoryList options={options} />
                   </div>
                 </div>

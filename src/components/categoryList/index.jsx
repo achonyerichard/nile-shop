@@ -4,7 +4,7 @@
 const CategoryList = ({options}) => {
   return (
     <>
-     <ul className="w-full">
+     <ul className="w-full ">
                      {options.map((item)=>(
                         <li key={item.id} className="py-5  px-5">
                         <div className="flex items-center space-x-4">
