@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { BsFillPersonFill } from "react-icons/bs";
+import { BsFillPersonFill,BsFillBagCheckFill } from "react-icons/bs";
 import { FaHeart } from "react-icons/fa";
 import { Link } from "react-router-dom";
+
 
 const Navigation = () => {
   const [profile, setProfile] = useState(false);
@@ -29,7 +30,7 @@ const Navigation = () => {
       }>
         <div className="flex-1 flex justify-between items-center">
           <Link to="/" className="text-xl text-white">
-            Nile-Shop
+           <span className="flex justify-center text-white gap-1"> Caro-Shop<span><BsFillBagCheckFill/></span></span>
           </Link>
         </div>
 

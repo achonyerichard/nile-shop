@@ -1,13 +1,14 @@
 import {Link} from "react-router-dom"
+import { BsFillBagCheckFill } from "react-icons/bs";
 
 const Login = () => {
   return (
     <>
    <div className="login-bg min-h-screen pt-12 md:pt-20 pb-6 px-2 md:px-0" >
     <header className="max-w-lg mx-auto">
-        <a href="#">
-            <h1 className="text-4xl font-bold text-white text-center">Nile-Shop</h1>
-        </a>
+    <Link to="/" className="text-xl text-white">
+           <span className="flex justify-center text-white gap-1"> Caro-Shop<span><BsFillBagCheckFill/></span></span>
+          </Link>
     </header>
 
     <main className="bg-white max-w-lg mx-auto p-8 md:p-12 my-10 rounded-lg shadow-2xl">
