@@ -70,11 +70,11 @@ const Navigation = () => {
                       href="#"
                     >
                       <span>
-                        <Link to="login">Login</Link>
+                        <Link to="/login">Login</Link>
                       </span>
                       /
                       <span>
-                        <Link to="register">Register</Link>
+                        <Link to="/register">Register</Link>
                       </span>
                     </div>
                   </li>

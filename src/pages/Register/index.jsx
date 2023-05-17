@@ -188,7 +188,7 @@ const Register = () => {
 
         <div className="max-w-lg mx-auto text-center mt-12 mb-6">
           <p className="text-white">
-            Dont have an account ?{" "}
+            Have have an account ?{" "}
             <Link to="/login" className="font-bold hover:underline">
               Login
             </Link>

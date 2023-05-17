@@ -19,7 +19,7 @@ const Wishlist = () => {
 
       <section className="md:mt-28 mt-28 w-full px-4 md:px-40 mx-auto grid grid-cols-1 lg:grid-cols-1 md:grid-cols-1  justify-center gap-y-4 md:gap-y-10 gap-x-4   mb-5">
         <header className="pb-2">
-          <h2 className="md:text-4xl font-medium text-center text-black ">
+          <h2 className="text-2xl md:text-4xl font-medium text-center text-black ">
             Wishlist Items
           </h2>
         </header>
