@@ -1,10 +1,11 @@
-import { useState } from "react";
-import { BsFillPersonFill,BsFillBagCheckFill } from "react-icons/bs";
-import { FaHeart } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { BsFillPersonFill, BsFillBagCheckFill } from "react-icons/bs";
 
+import { Link } from "react-router-dom";
+import { WishListContext } from "../../contexts/wishlist-context";
 
 const Navigation = () => {
+  const { wishlistItem } = useContext(WishListContext);
   const [profile, setProfile] = useState(false);
   const [nav, setNav] = useState(false);
 
@@ -23,14 +24,22 @@ const Navigation = () => {
   return (
     <>
       {" "}
-      <nav className={
-        nav
-          ? `top-0 bg-[#DD8888] z-10 nav fixedTop active shadow-lg lg:px-16 px-8  flex flex-wrap items-center py-2 md:py-4 shadow-md max-w-[1920px]`
-          : `nav fixedTop top-0 bg-[#DD8888] z-10 shadow-lg lg:px-16 px-8  flex flex-wrap items-center py-2 md:py-4 shadow-md max-w-[1920px]`
-      }>
+      <nav
+        className={
+          nav
+            ? `top-0 bg-[#DD8888] z-10 nav fixedTop active shadow-lg lg:px-16 px-8  flex flex-wrap items-center py-2 md:py-4 shadow-md max-w-[1920px]`
+            : `nav fixedTop top-0 bg-[#DD8888] z-10 shadow-lg lg:px-16 px-8  flex flex-wrap items-center py-2 md:py-4 shadow-md max-w-[1920px]`
+        }
+      >
         <div className="flex-1 flex justify-between items-center">
           <Link to="/" className="text-xl text-white">
-           <span className="flex justify-center text-white gap-1"> Caro-Shop<span><BsFillBagCheckFill/></span></span>
+            <span className="flex justify-center text-white gap-1">
+              {" "}
+              Caro-Shop
+              <span>
+                <BsFillBagCheckFill />
+              </span>
+            </span>
           </Link>
         </div>
 
@@ -47,43 +56,64 @@ const Navigation = () => {
                   />
                 </div>
                 <ul
-                    className={
-                      profile
-                        ? `peer-focus-visible:block dropdown-menu right-9 md:right-0 min-w-max absolute bg-white text-base z-50 float-left py-2 list-none text-left rounded-lg shadow-lg mt-1 m-0 bg-clip-padding border-none`
-                        : `hidden`
-                    }
-                    aria-labelledby="dropdownMenuButton2"
-                  >
-                    <li>
-                      <div
-                        
-                        className=" dropdown-item text-lg py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700 hover:bg-gray-100
+                  className={
+                    profile
+                      ? `peer-focus-visible:block dropdown-menu right-9 md:right-0 min-w-max absolute bg-white text-base z-50 float-left py-2 list-none text-left rounded-lg shadow-lg mt-1 m-0 bg-clip-padding border-none`
+                      : `hidden`
+                  }
+                  aria-labelledby="dropdownMenuButton2"
+                >
+                  <li>
+                    <div
+                      className=" dropdown-item text-lg py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700 hover:bg-gray-100
             "
-                        href="#"
-                      >
-                        <span><Link to="login">Login</Link></span>
-                        /<span><Link to="register">Register</Link></span>
-                      </div>
-                    </li>
-                    <li>
-                      <Link
-                        to="/gallery"
-                        className=" dropdown-item text-lg py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700 hover:bg-gray-100
+                      href="#"
+                    >
+                      <span>
+                        <Link to="login">Login</Link>
+                      </span>
+                      /
+                      <span>
+                        <Link to="register">Register</Link>
+                      </span>
+                    </div>
+                  </li>
+                  <li>
+                    <Link
+                      to="/gallery"
+                      className=" dropdown-item text-lg py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700 hover:bg-gray-100
             "
-                        href="#"
-                      >
-                        Profile
-                      </Link>
-                    </li>
-                  </ul>
-             
+                      href="#"
+                    >
+                      Profile
+                    </Link>
+                  </li>
+                </ul>
               </li>
               <li>
                 <div className="relative cursor-pointer md:p-4 py-2 md:py-3 px-0  md:mb-0 mb-2 ">
-                  <FaHeart className="text-2xl text-white cursor-pointer" />
+                  <Link to="/wishlist">
+                  <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      fill="white"
+                      className=""
+                      viewBox="0 0 16 16"
+                    
+                      
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M8 7.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0v-1.5H6a.5.5 0 0 1 0-1h1.5V8a.5.5 0 0 1 .5-.5z"
+                      />
+                      <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z" />
+                    </svg>
+                  </Link>
+                
                   <div className="absolute md:-top-0 -top-3 -right-2 md:right-2">
                     <span className="text-white font-bold text-sm rounded-full ">
-                      0
+                      {wishlistItem.length}
                     </span>
                   </div>
                 </div>
