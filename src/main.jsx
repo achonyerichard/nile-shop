@@ -6,6 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import { ProductsProvider } from "./contexts/products-context.jsx";
 import { ReviewsProvider } from "./contexts/reviews-context.jsx";
 import { WishListProvider } from "./contexts/wishlist-context.jsx";
+import { ModalsProvider } from "./contexts/modal-context.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -13,7 +14,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <ProductsProvider>
         <ReviewsProvider>
           <WishListProvider>
-          <App />
+            <ModalsProvider>
+              <App />
+            </ModalsProvider>
           </WishListProvider>
         </ReviewsProvider>
       </ProductsProvider>

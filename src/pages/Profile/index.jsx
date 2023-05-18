@@ -4,10 +4,23 @@ import { ProductsContext } from "../../contexts/products-context";
 import Navigation from "../../components/Navigation";
 import { BiEditAlt } from "react-icons/bi";
 import { RiDeleteBinLine } from "react-icons/ri";
+import AddProductModal from "../../components/Modals/AddProductModal";
+import DeleteModal from "../../components/Modals/DeleteProduct";
+import { ModalsContext } from "../../contexts/modal-context";
+import EditModal from "../../components/Modals/EditProductModal";
 
 const Profile = () => {
   const [filteredData, setFilteredData] = useState([]);
   const { productData } = useContext(ProductsContext);
+  const {
+    addProductModal,
+    setAddProductModal,
+    setDeleteModal,
+    deleteModal,
+    editModal,
+    setEditModal,
+  } = useContext(ModalsContext);
+
   console.log(productData);
   useEffect(() => {
     const filteredProducts = productData.filter(
@@ -24,12 +37,15 @@ const Profile = () => {
       <main className="mb-20">
         <section className="p-6 md:p-8 lg:px-40 w-full lg:mt-20 mt-10">
           <div className="container mx-auto mt-10">
-            <div className="md:flex  my-10 md:gap-x-4 gap-y-6 md:gap-y-0 h-full items-stretch ">
+            <div className="md:flex  my-10 md:gap-x-4 gap-y-6 md:gap-y-0 h-full items-stretch">
               <div className="md:w-2/3 bg-white md:px-10  md:py-10 py-3 px-4">
                 <div className="md:flex justify-between items-center">
                   <div className="block p-2   rounded-lg  w-auto   md:shadow-md hover:bg-gray-100">
                     <div className="flex cursor-pointer flex-col items-center md:justify-center ">
-                      <button className="flex cursor-pointer  items-center md:justify-center w-10 h-10  text-pink-100 transition-colors border-solid  shadow-2xl duration-150 bg-[#A16161] rounded-full focus:shadow-outline hover:bg-pink-full">
+                      <button
+                        onClick={() => setAddProductModal(true)}
+                        className="flex cursor-pointer  items-center md:justify-center w-10 h-10  text-pink-100 transition-colors border-solid  shadow-2xl duration-150 bg-[#A16161] rounded-full focus:shadow-outline hover:bg-pink-full"
+                      >
                         <svg
                           className="h-16 w-12 fill-white"
                           xmlns="http://www.w3.org/2000/svg"
@@ -45,7 +61,7 @@ const Profile = () => {
                   </div>
 
                   <h2 className="font-semibold text-sm text-[#908D7E] text-center md:text-right ">
-                   Edit and delete your products
+                    Edit and delete your products
                   </h2>
                 </div>
                 <div className="flex items-center bg-[#F7F7F7] md:mt-10 mt-3 mb-5 p-3">
@@ -86,17 +102,23 @@ const Profile = () => {
                     </div>
 
                     <span className="text-center w-1/4 font-semibold text-sm flex justify-center">
-                      <BiEditAlt className="text-[#A16161] text-2xl" />
+                      <BiEditAlt
+                        className="text-[#A16161] text-2xl cursor-pointer"
+                        onClick={() => setEditModal(true)}
+                      />
                     </span>
                     <span className="text-center w-1/4 font-semibold text-sm flex justify-center">
-                      <RiDeleteBinLine className="text-[#A16161] text-2xl" />
+                      <RiDeleteBinLine
+                        className="text-[#A16161] text-2xl cursor-pointer"
+                        onClick={() => setDeleteModal(true)}
+                      />
                     </span>
                   </div>
                 ))}
 
                 <Link
                   to="/supermarket"
-                  className="flex font-semibold text-[#FF8B1F] font-semibold hover:text-[#FCD733]   text-sm mt-10"
+                  className="flex  text-[#FF8B1F] font-semibold hover:text-[#FCD733]   text-sm mt-10"
                 >
                   <svg
                     className="fill-current mr-2 text-black w-4"
@@ -108,7 +130,7 @@ const Profile = () => {
                 </Link>
               </div>
 
-              <div className="md:w-1/3 bg-white mt-5 md:mt-0">
+              <div className="md:w-1/3 bg-white mt-5 md:mt-0 sticky top-20">
                 <div className="p-4 ">
                   <header className="flex justify-center py-2">
                     <h3 className="font-bold text-2xl text-black">
@@ -169,6 +191,12 @@ const Profile = () => {
           </div>
         </section>
       </main>
+      <AddProductModal
+        setAddProductModal={setAddProductModal}
+        addProductModal={addProductModal}
+      />
+      <DeleteModal setDeleteModal={setDeleteModal} deleteModal={deleteModal} />
+      <EditModal editModal={editModal} setEditModal={setEditModal} />
     </>
   );
 };
