@@ -34,23 +34,23 @@ export default function Pagination({
         </p>
       </div>
       <nav className='block'>
-        <ul className='flex justify-center pl-0 rounded list-none flex-wrap'>
-          <li>
+        <ul className='flex justify-center pl-0 rounded list-none flex-wrap ' >
+          <li className="">
             {pageNumbers.map((number,index) => (
-              <a
+              <span
               key={index}
                 onClick={() => {
                   paginate(number);
                 }}
-                href='#'
+              
                 className={
                   currentPage === number
-                    ? "bg-white font-bold border-[#DD8888] text-red-500 hover:bg-blue-200 relative inline-flex items-center px-4 py-2 border text-sm "
-                    : "bg-[#DD8888] border-gray-300 text-white hover:bg-blue-200 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
+                    ? "mr-2 rounded-full bg-[#DD8888] font-bold border-[#DD8888] text-white hover:bg-blue-200 relative inline-flex items-center px-4 py-2 border text-sm "
+                    : "rounded-full bg-white border-gray-300 text-red-500 hover:bg-blue-200 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
                 }
               >
                 {number}
-              </a>
+              </span>
             ))}
           </li>
         </ul>

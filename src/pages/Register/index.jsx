@@ -2,14 +2,49 @@ import * as nigerianStates from "nigerian-states-and-lgas";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { BsFillBagCheckFill } from "react-icons/bs";
+import useSignUp from "../../hooks/useSignup";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Register = () => {
   const states = nigerianStates.all();
+
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmpassword, setConfirmPassword] = useState("");
+  const [gender, setGender] = useState("");
+  const [address, setAddress] = useState("");
+  const [phone, setPhone] = useState("");
   const [selectedState, setSelectedState] = useState("");
 
   const [selectedLga, setSelectedLga] = useState("");
   const [filteredLga, setFilteredLga] = useState([]);
 
+  const { signup,error, loading, success, setError } = useSignUp();
+
+  const data = {
+    firstname: firstName,
+    lastname: lastName,
+    gender: gender,
+    state: selectedState,
+    lga: selectedLga,
+    number: `+234${phone}`,
+    address: address,
+    email: email,
+    password: password,
+  };
+  async function handleSubmit(e) {
+    e.preventDefault();
+    if (!email && !password) {
+      setError("Email and Password cannot be empty");
+    } else {
+      e.preventDefault();
+      await signup(data);
+    }
+    
+  }
   useEffect(() => {
     const filteredStates = states?.filter(
       (state) => state?.state === selectedState
@@ -17,10 +52,32 @@ const Register = () => {
 
     setFilteredLga(filteredStates[0]?.lgas);
   }, [selectedState, states]);
-
+  useEffect(() => {
+    if (error) {
+      toast.error(error, {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    } else if (success) {
+      toast.success(success, {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
+  }, [error, success]);
   return (
     <>
       <div className="login-bg min-h-screen pt-12 md:pt-20 pb-6 px-2 md:px-0">
+      <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+        />
         <header className="max-w-lg mx-auto">
           <Link to="/" className="text-xl text-white">
             <span className="flex justify-center text-white gap-1">
@@ -42,19 +99,40 @@ const Register = () => {
           </section>
 
           <section className="mt-10">
-            <form className="flex flex-col" method="POST" action="#">
+            <form className="flex flex-col" onSubmit={handleSubmit}>
               <div className="grid lg:grid-cols-2 gap-2">
                 <div className="mb-6 pt-3 rounded bg-gray-200">
                   <label
                     className="block text-gray-700 text-sm font-bold mb-2 ml-3"
-                    htmlFor="name"
+                    htmlFor="firstNname"
                   >
-                    Input your full name
+                    Input your first name
                   </label>
                   <input
                     type="text"
-                    id="name"
+                    id="firstName"
                     className="bg-gray-200 rounded w-full text-gray-700 focus:outline-none border-b-4 border-gray-300 focus:border-[#A16161] transition duration-500 px-3 "
+                    onChange={(e) => {
+                      setFirstName(e.target.value);
+                      console.log(e.target.value);
+                    }}
+                  />
+                </div>
+                <div className="mb-6 pt-3 rounded bg-gray-200">
+                  <label
+                    className="block text-gray-700 text-sm font-bold mb-2 ml-3"
+                    htmlFor="lastName"
+                  >
+                    Input your last name
+                  </label>
+                  <input
+                    type="text"
+                    id="lastName"
+                    className="bg-gray-200 rounded w-full text-gray-700 focus:outline-none border-b-4 border-gray-300 focus:border-[#A16161] transition duration-500 px-3 "
+                    onChange={(e) => {
+                      setLastName(e.target.value);
+                      console.log(e.target.value);
+                    }}
                   />
                 </div>
                 <div className="mb-6 pt-3 rounded bg-gray-200">
@@ -67,7 +145,12 @@ const Register = () => {
                   <input
                     type="email"
                     id="email"
+                    value={email}
                     className="bg-gray-200 rounded w-full text-gray-700 focus:outline-none border-b-4 border-gray-300 focus:border-[#A16161] transition duration-500 px-3 "
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                      console.log(e.target.value);
+                    }}
                   />
                 </div>
                 <div className="mb-6 pt-3 rounded bg-gray-200">
@@ -77,16 +160,23 @@ const Register = () => {
                   >
                     Phone Number
                   </label>
-                  <input
-                    type="number"
-                    id="number"
-                    className="bg-gray-200 rounded w-full text-gray-700 focus:outline-none border-b-4 border-gray-300 focus:border-[#A16161] transition duration-500 px-3 "
-                  />
+                  <div className="relative flex">
+                    <div className="absolute left-1">
+                      <p className="text-black">+234</p>
+                    </div>
+                    <input
+                      type="number"
+                      id="number"
+                      className="pl-10 bg-gray-200 rounded w-full text-gray-700 focus:outline-none border-b-4 border-gray-300 focus:border-[#A16161] transition duration-500 px-3 "
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                    />
+                  </div>
                 </div>
                 <div className="mb-6 pt-3 rounded bg-gray-200">
                   <label
                     className="block text-gray-700 text-sm font-bold mb-2 ml-3"
-                    htmlFor="number"
+                    htmlFor="gender"
                   >
                     Gender
                   </label>
@@ -95,6 +185,7 @@ const Register = () => {
                     id=""
                     className="bg-gray-200 rounded w-full text-gray-700 focus:outline-none border-b-4 border-gray-300 focus:border-[#A16161] transition duration-500 px-3 "
                     required
+                    onChange={(e) => setGender(e.target.value)}
                   >
                     <option value="">Select your Gender</option>
                     <option value="Male">Male</option>
@@ -104,13 +195,13 @@ const Register = () => {
                 <div className="mb-6 pt-3 rounded bg-gray-200">
                   <label
                     className="block text-gray-700 text-sm font-bold mb-2 ml-3"
-                    htmlFor="number"
+                    htmlFor="state"
                   >
                     State
                   </label>
                   <select
                     name="state"
-                    id=""
+                    id="state"
                     className="bg-gray-200 rounded w-full text-gray-700 focus:outline-none border-b-4 border-gray-300 focus:border-[#A16161] transition duration-500 px-3 "
                     required
                     value={selectedState}
@@ -127,7 +218,7 @@ const Register = () => {
                 <div className="mb-6 pt-3 rounded bg-gray-200">
                   <label
                     className="block text-gray-700 text-sm font-bold mb-2 ml-3"
-                    htmlFor="number"
+                    htmlFor="lgas"
                   >
                     Lga
                   </label>
@@ -159,12 +250,14 @@ const Register = () => {
                     type="address"
                     id="name"
                     className="bg-gray-200 rounded w-full text-gray-700 focus:outline-none border-b-4 border-gray-300 focus:border-[#A16161] transition duration-500 px-3 "
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
                   />
                 </div>
                 <div className="mb-6 pt-3 rounded bg-gray-200">
                   <label
                     className="block text-gray-700 text-sm font-bold mb-2 ml-3"
-                    htmlFor="name"
+                    htmlFor="password"
                   >
                     Password
                   </label>
@@ -172,15 +265,33 @@ const Register = () => {
                     type="password"
                     id="password"
                     className="bg-gray-200 rounded w-full text-gray-700 focus:outline-none border-b-4 border-gray-300 focus:border-[#A16161] transition duration-500 px-3 "
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </div>
+                <div className="mb-6 pt-3 rounded bg-gray-200">
+                  <label
+                    className="block text-gray-700 text-sm font-bold mb-2 ml-3"
+                    htmlFor="confirmpassword"
+                  >
+                    Confirm Password
+                  </label>
+                  <input
+                    value={confirmpassword}
+                    type="password"
+                    id="confirmpassword"
+                    className="bg-gray-200 rounded w-full text-gray-700 focus:outline-none border-b-4 border-gray-300 focus:border-[#A16161] transition duration-500 px-3 "
+                    onChange={(e) => setConfirmPassword(e.target.value)}
                   />
                 </div>
               </div>
 
               <button
-                className="bg-[#A16161] hover:bg-purple-700 text-white font-bold py-2 rounded shadow-lg hover:shadow-xl transition duration-200"
+                className="bg-[#A16161] hover:bg-[#9e6868] text-white font-bold py-2 rounded shadow-lg hover:shadow-xl transition duration-200"
                 type="submit"
+                disabled={loading}
               >
-                Login
+                {loading ? "Loading...":"Login"}
               </button>
             </form>
           </section>

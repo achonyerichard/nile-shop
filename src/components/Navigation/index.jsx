@@ -3,12 +3,20 @@ import { BsFillPersonFill, BsFillBagCheckFill } from "react-icons/bs";
 
 import { Link } from "react-router-dom";
 import { WishListContext } from "../../contexts/wishlist-context";
+import { useAuthContext } from "../../hooks/useAuthContext";
+import useLogout from "../../hooks/useLogout";
 
 const Navigation = () => {
+  const { user } = useAuthContext();
+
   const { wishlistItem } = useContext(WishListContext);
   const [profile, setProfile] = useState(false);
   const [nav, setNav] = useState(false);
 
+  const { logout } = useLogout();
+  const handleLogout = () => {
+    logout();
+  };
   if (typeof window !== "undefined") {
     const changeBackground = () => {
       if (window.scrollY >= 80) {
@@ -58,7 +66,7 @@ const Navigation = () => {
                 <ul
                   className={
                     profile
-                      ? `peer-focus-visible:block dropdown-menu right-9 md:right-0 min-w-max absolute bg-white text-base z-50 float-left py-2 list-none text-left rounded-lg shadow-lg mt-1 m-0 bg-clip-padding border-none`
+                      ? `peer-focus-visible:block dropdown-menu right-9 md:right-20 min-w-max absolute bg-white text-base z-50 float-left py-2 list-none text-left rounded-lg shadow-lg mt-1 m-0 bg-clip-padding border-none`
                       : `hidden`
                   }
                   aria-labelledby="dropdownMenuButton2"
@@ -69,39 +77,45 @@ const Navigation = () => {
             "
                       href="#"
                     >
-                      <span>
-                        <Link to="/login">Login</Link>
-                      </span>
-                      /
-                      <span>
-                        <Link to="/register">Register</Link>
-                      </span>
+                      {user ? (
+                        <span className="cursor-pointer" onClick={handleLogout}>Logout</span>
+                      ) : (
+                        <>
+                          <span>
+                            <Link to="/login">Login</Link>
+                          </span>
+                          /
+                          <span>
+                            <Link to="/register">Register</Link>
+                          </span>
+                        </>
+                      )}
                     </div>
                   </li>
-                  <li>
-                    <Link
-                      to="/profile"
-                      className=" dropdown-item text-lg py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700 hover:bg-gray-100
+                  {user && (
+                    <li>
+                      <Link
+                        to="/profile"
+                        className=" dropdown-item text-lg py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700 hover:bg-gray-100
             "
-                      href="#"
-                    >
-                      Profile
-                    </Link>
-                  </li>
+                        href="#"
+                      >
+                        Profile
+                      </Link>
+                    </li>
+                  )}
                 </ul>
               </li>
               <li>
                 <div className="relative cursor-pointer md:p-4 py-2 md:py-3 px-0  md:mb-0 mb-2 ">
                   <Link to="/wishlist">
-                  <svg
+                    <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="20"
                       height="20"
                       fill="white"
                       className=""
                       viewBox="0 0 16 16"
-                    
-                      
                     >
                       <path
                         fillRule="evenodd"
@@ -110,7 +124,7 @@ const Navigation = () => {
                       <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z" />
                     </svg>
                   </Link>
-                
+
                   <div className="absolute md:-top-0 -top-3 -right-2 md:right-2">
                     <span className="text-white font-bold text-sm rounded-full ">
                       {wishlistItem.length}
