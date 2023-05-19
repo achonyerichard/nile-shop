@@ -98,3 +98,11 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+.react-rater-star {
+  font-size: 28px; /* Adjust the font-size value as needed */
+  color:#858181
+}
+
+.react-rater-star.is-active {
+  color: #A16161; /* Adjust the active color value as needed */
+}

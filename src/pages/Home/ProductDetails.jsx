@@ -8,6 +8,7 @@ import { ReviewsContext } from "../../contexts/reviews-context";
 import Pagination from "../../components/pagination/Pagination";
 import Footer from "../../components/Footer";
 import Navigation from "../../components/Navigation";
+import Rating from "../../components/Rating/Rating";
 
 const ProductDetails = () => {
   const { productData } = useContext(ProductsContext);
@@ -138,7 +139,9 @@ const ProductDetails = () => {
                 exercitationem porro saepe ea harum corrupti vero id laudantium
                 enim, libero blanditiis expedita cupiditate a est.
               </p>
-
+<div>
+  <Rating/>
+</div>
               <div className="md:flex py-4 space-x-4 space-y-4 md:space-y-0 items-center">
                 <button
                   type="button"

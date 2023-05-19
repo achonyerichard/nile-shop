@@ -1,7 +1,28 @@
 import { FaWindowClose } from "react-icons/fa";
+import axios from "axios";
 
 // eslint-disable-next-line react/prop-types
 const AddProductModal = ({ setAddProductModal, addProductModal }) => {
+  async function handleChange(e) {
+    e.preventDefault();
+    const file = e.target.files[0];
+    console.log("line0", e.target);
+    console.log("line1",file);
+    const formData = new FormData();
+    formData.append("file", file);
+
+    await axios
+      .post(`https://caroapp-2sc7.onrender.com/api/product/upload/`, {
+        avatar: formData,
+      })
+      .then((result) => {
+        console.log("Post request, results", result);
+      })
+      .catch((error) => {
+        console.log("Errors", error);
+      });
+  }
+
   return (
     <>
       {addProductModal && (
@@ -14,9 +35,10 @@ const AddProductModal = ({ setAddProductModal, addProductModal }) => {
             <div className="bg-white z-50 rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full">
               <div className="relative">
                 <div className="absolute top-0 right-0">
-                 
-                   <FaWindowClose className="text-xl text-black cursor-pointer " onClick={()=>setAddProductModal(false)}/>
-
+                  <FaWindowClose
+                    className="text-xl text-black cursor-pointer "
+                    onClick={() => setAddProductModal(false)}
+                  />
                 </div>
               </div>
               <div className="bg-white px-10 pt-5 pb-4 sm:p-6 sm:pb-4">
@@ -76,7 +98,7 @@ const AddProductModal = ({ setAddProductModal, addProductModal }) => {
                         <label
                           htmlFor="fileInput"
                           type="button"
-                          className="cursor-pointer inine-flex justify-between items-center focus:outline-none border py-2 px-2 rounded-lg shadow-sm text-left text-white bg-[#aa6e6e] hover:bg-gray-100 font-medium"
+                          className="cursor-pointer inine-flex justify-between items-center focus:outline-none border py-2 px-2 rounded-lg shadow-sm text-left text-white bg-[#aa6e6e]  font-medium"
                         >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -107,6 +129,7 @@ const AddProductModal = ({ setAddProductModal, addProductModal }) => {
                           accept="image/*"
                           className="hidden"
                           type="file"
+                          onChange={(e) => handleChange(e)}
                         />
                       </div>
                     </div>
