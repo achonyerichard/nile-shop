@@ -8,14 +8,19 @@ import Footer from "../../components/Footer";
 import Navigation from "../../components/Navigation";
 import { CategoryContext } from "../../contexts/categories-context";
 import CategoryPills from "../../components/categoryPills";
-import TopCategories from "../../components/topCategories/INDEX.JSX";
+import TopCategories from "../../components/topCategories/index.jsx";
 
 const Home = () => {
-  const { productData,filteredProducts, filterProductsByCategory,setFilteredProducts } = useContext(ProductsContext);
+  const {
+    productData,
+    filteredProducts,
+    filterProductsByCategory,
+    setFilteredProducts,
+  } = useContext(ProductsContext);
   const { categoryData } = useContext(CategoryContext);
 
-
-  const displayProducts = filteredProducts.length > 0 ? filteredProducts : productData;
+  const displayProducts =
+    filteredProducts.length > 0 ? filteredProducts : productData;
 
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage] = useState(5);
@@ -29,11 +34,10 @@ const Home = () => {
 
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
- 
+
   return (
     <>
-    <Navigation/>
-      {" "}
+      <Navigation />{" "}
       <div className="hero-bg flex items-center justify-center text-center md:mt-24 mt-20">
         <div className="bg-[#975720] bg-opacity-90 w-50 text-white rounded-md w-100 m-5 p-5 sm:m-10 sm:p-10 md:max-w-xl lg:rounded-lg">
           <h1 className="font-bold text-xl mb-2 md:mb-4 md:text-3xl">
@@ -70,8 +74,12 @@ const Home = () => {
         <div className="md:px-20 px-4">
           <div className="w-full max-w-[1920px]  mx-auto ">
             <div className=" md:flex flex-row justify-center  h-full items-stretch lg:gap-4 lg:pt-5 pt-5">
-              <CategoryPills categoryData={categoryData} filterProductsByCategory={filterProductsByCategory} productData={productData} setFilteredProducts={setFilteredProducts}/>
-            
+              <CategoryPills
+                categoryData={categoryData}
+                filterProductsByCategory={filterProductsByCategory}
+                productData={productData}
+                setFilteredProducts={setFilteredProducts}
+              />
 
               <div className="   md:w-1/5 bg-white hidden md:block  shadow-xl  ">
                 <div className="  h-screen  top-20 sticky">
@@ -81,7 +89,12 @@ const Home = () => {
                     </h2>
                   </header>
                   <div className="flex justify-center h-72">
-                    <CategoryList categoryData={categoryData} filterProductsByCategory={filterProductsByCategory} productData={productData} setFilteredProducts={setFilteredProducts}/>
+                    <CategoryList
+                      categoryData={categoryData}
+                      filterProductsByCategory={filterProductsByCategory}
+                      productData={productData}
+                      setFilteredProducts={setFilteredProducts}
+                    />
                   </div>
                 </div>
               </div>
@@ -93,7 +106,11 @@ const Home = () => {
                         Top Categories
                       </h2>
                     </header>
-                    <TopCategories filterProductsByCategory={filterProductsByCategory} setFilteredProducts={setFilteredProducts}  productData={productData}/>
+                    <TopCategories
+                      filterProductsByCategory={filterProductsByCategory}
+                      setFilteredProducts={setFilteredProducts}
+                      productData={productData}
+                    />
                     <div>
                       <Products products={currentProducts} />
                     </div>
@@ -110,7 +127,7 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <Footer/>
+      <Footer />
     </>
   );
 };
