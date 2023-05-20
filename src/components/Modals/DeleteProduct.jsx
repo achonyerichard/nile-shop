@@ -42,7 +42,7 @@ const DeleteModal = ({setDeleteModal,deleteModal,id}) => {
         setLoading(false);
       });
   }
- console.log(deleteModal);
+
 
 
  useEffect(() => {

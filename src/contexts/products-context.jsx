@@ -25,15 +25,15 @@ export const ProductsProvider = ({ children }) => {
 
 
   const filterProductsByCategory = (category) => {
-    const filtered = productData.filter((product) => product.category.toLowerCase() === category.name.toLowerCase());
+    const filtered = productData.filter((product) => product?.categoryName === category?.name);
     setFilteredProducts(filtered);
-    console.log(category);
+
   };
-  useEffect(()=>{
-    console.log("filter",filteredProducts);
+
   
   
-    },[filteredProducts])
+  
+   
 
     const [data] = useApi(
       "https://caroapp-2sc7.onrender.com/api/product/products"

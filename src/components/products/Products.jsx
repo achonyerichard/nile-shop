@@ -7,22 +7,26 @@ import { useAuthContext } from "../../hooks/useAuthContext";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Rater from "react-rater";
 
 const Products = ({ products }) => {
   const { user } = useAuthContext();
 
-  const { wishlistItem, wishlistCount, addItemToWishLlist, wishListTotal,error,success } =
-    useContext(WishListContext);
+  const {
+    wishlistItem,
+    wishlistCount,
+    addItemToWishLlist,
+    wishListTotal,
+    error,
+    success,
+  } = useContext(WishListContext);
   const [clicked, setClicked] = useState("");
-
 
   const token = user?.token;
 
   async function wishlistAdd(product) {
     addItemToWishLlist(product);
     setClicked(product.id);
-
-   
   }
   useEffect(() => {
     if (error) {
@@ -68,6 +72,9 @@ const Products = ({ products }) => {
                 <p className="text-lg font-bold text-black truncate block capitalize">
                   {item?.name}
                 </p>
+                <div>
+                <Rater total={5} rating={item?.reviews/item?.numberOfReview}   />
+                </div>
                 <div className="md:flex items-center justify-between space-y-3 md:justify-center">
                   <div className="md:w-1/3">
                     <p

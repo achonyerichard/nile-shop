@@ -1,14 +1,16 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Rater from "react-rater";
 import "react-rater/lib/react-rater.css";
 import axios from "axios";
 import { useAuthContext } from "../../hooks/useAuthContext";
 
-const Rating = ({ reviews, amount, id }) => {
+const Rating = ({data }) => {
   const [rating, setRating] = useState(0);
   const { user } = useAuthContext();
   const token = user?.token;
+
+  const id =data?.id
 
   async function handleRate(rate) {
     setRating(rate.rating);
@@ -31,10 +33,10 @@ const Rating = ({ reviews, amount, id }) => {
         console.log("Errors", error);
       });
   }
-  useEffect(() => {
-    console.log(rating)
-    console.log("revv",reviews);
-  }, [rating,reviews,amount]);
-  return <Rater total={5} rating={reviews/amount} onRate={handleRate} />;
+
+
+    console.log("revvuuuu",data?.numberOfReview);
+
+  return <Rater total={5} rating={data?.reviews/data?.numberOfReview}  onRate={handleRate} />;
 };
 export default Rating;

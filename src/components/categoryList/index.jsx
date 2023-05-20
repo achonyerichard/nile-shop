@@ -1,10 +1,18 @@
 /* eslint-disable react/prop-types */
 
-const CategoryList = ({ categoryData, filterProductsByCategory,productData,setFilteredProducts }) => {
+const CategoryList = ({
+  categoryData,
+  filterProductsByCategory,
+  productData,
+  setFilteredProducts,
+}) => {
   return (
     <>
       <ul className="w-full ">
-        <li className="py-5  px-5"     onClick={() => setFilteredProducts(productData)}>
+        <li
+          className="py-5  px-5"
+          onClick={() => setFilteredProducts(productData)}
+        >
           <div className="flex items-center space-x-4">
             <div className="flex-1 min-w-0">
               <p className="text-xl text-black truncate  capitalize cursor-pointer">

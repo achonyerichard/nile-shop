@@ -109,7 +109,7 @@ export const WishListProvider = ({ children }) => {
   }
   useEffect(() => {
     localStorage.setItem('wishlistItems', JSON.stringify(wishlistItem));
-    console.log("ct",wishlistItem);
+
   }, [wishlistItem]);
 
   

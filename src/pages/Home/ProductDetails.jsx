@@ -1,18 +1,29 @@
+/* eslint-disable no-unused-vars */
 import { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { ProductsContext } from "../../contexts/products-context";
 import { FaWhatsapp } from "react-icons/fa";
 import ReviewForm from "../../components/Reviews/ReviewForm";
 import ReviewList from "../../components/Reviews/ReviewList";
-
+import { WishListContext } from "../../contexts/wishlist-context";
 import Pagination from "../../components/pagination/Pagination";
 import Footer from "../../components/Footer";
 import Navigation from "../../components/Navigation";
 import Rating from "../../components/Rating/Rating";
 import useApi from "../../hooks/useApi";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ProductDetails = () => {
   const { productData } = useContext(ProductsContext);
+  
+  const {
+    
+    addItemToWishLlist,
+
+    error,
+    success,
+  } = useContext(WishListContext);
 
   const { id } = useParams();
   console.log(id);
@@ -23,7 +34,7 @@ const ProductDetails = () => {
     `https://caroapp-2sc7.onrender.com/api/comment/product/${id}`
   );
   console.log("comments", data);
-
+  const [clicked, setClicked] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [reviewsPerPage] = useState(3);
 
@@ -42,11 +53,39 @@ const ProductDetails = () => {
     setFilteredData(filteredProducts[0]);
   }, [productData, id]);
 
+  async function wishlistAdd(product) {
+    addItemToWishLlist(product);
+    setClicked(product.id);
+  }
+  useEffect(() => {
+    if (error) {
+      toast.error(error, {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    } else if (success) {
+      toast.success(success, {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
+  }, [error, success]);
   return (
     <>
       <Navigation />
       <div className="py-28">
+        
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <ToastContainer
+        position="center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
           <div className="flex items-center space-x-2 text-gray-400 text-sm">
             <Link to="/" className="hover:underline hover:text-gray-600">
               Home
@@ -141,14 +180,13 @@ const ProductDetails = () => {
               <p className="text-gray-800">{filteredData?.description}</p>
               <div>
                 <Rating
-                  review={filteredData?.reviews}
-                  amount={filteredData?.numberOfReview}
-                  id={filteredData?.id}
+                
+               data={filteredData}
                 />
               </div>
               <div className="md:flex py-4 space-x-4 space-y-4 md:space-y-0 items-center">
                 <button
-                  type="button"
+                   onClick={() => wishlistAdd(filteredData)}
                   className="h-14 px-6 py-2 w-full md:w-auto font-semibold rounded-xl bg-[#A16161] hover:bg-[#DD8888] text-white"
                 >
                   Add to Wishlist

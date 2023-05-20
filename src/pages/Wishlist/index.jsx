@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { Link } from "react-router-dom";
 import Navigation from "../../components/Navigation";
@@ -7,20 +7,89 @@ import { FaEye } from "react-icons/fa";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { WishListContext } from "../../contexts/wishlist-context";
 import useApi from "../../hooks/useApi";
+import axios from "axios"
+
+import { useAuthContext } from "../../hooks/useAuthContext";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Wishlist = () => {
-  const {  clearItemFromWishList } = useContext(WishListContext);
+  const {  clearItemFromWishList, } = useContext(WishListContext);
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const user = useAuthContext();
+  const token = user?.user?.token;
+  async function handleSubmit(product) {
+    setLoading(true);
+
+  
+    await axios
+      .delete(
+        `https://caroapp-2sc7.onrender.com/api/favourite/delete/${product?.id}`,
+        
+        {
+          headers: {
+            "x-auth-token": token,
+          },
+        }
+      )
+      .then((result) => {
+        console.log("Post request, results", result);
+  
+        setLoading(false);
+        setSuccess("Deleted Succesfully");
+     
+      })
+      .catch((error) => {
+        console.log("Errors", error);
+        setError(error.message);
+        setLoading(false);
+      });
+  }
+
+
+
+ useEffect(() => {
+  if (error) {
+    toast.error(error, {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+  } else if (success) {
+    toast.success(success, {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+  }
+}, [error, success]);
+
   const [data] = useApi(
     `https://caroapp-2sc7.onrender.com/api/favourite/mywishlist`
   );
+  console.log(data);
   const removeItem = (product) => {
     clearItemFromWishList(product);
+    handleSubmit(product)
   };
+
+  
   return (
     <>
       <Navigation />
 
       <section className="md:mt-28 mt-28 w-full px-4 md:px-40 mx-auto grid grid-cols-1 lg:grid-cols-1 md:grid-cols-1  justify-center gap-y-4 md:gap-y-10 gap-x-4   mb-5">
+      <ToastContainer
+              position="center"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="dark"
+            />
        <div className="">
         <header className="pb-2">
           <h2 className="text-2xl md:text-4xl font-medium text-center text-black ">
@@ -59,7 +128,7 @@ const Wishlist = () => {
                       </div>
 
                       <div className="flex md:justify-center md:w-1/3">
-                        <Link to={`/product/${item.id}`}>
+                        <Link to={`/product/${item?.Productid}`}>
                           <button className="rounded px-2 py-1 text-md flex items-center gap-2 bg-[#DD8888] text-white hover:bg-[#bd5a5a] duration-300">
                             <p>View</p>
                             <FaEye />
@@ -69,6 +138,7 @@ const Wishlist = () => {
                       <div className="md:ml-auto md:w-1/3">
                         <button
                           onClick={() => removeItem(item)}
+                          disabled={loading}
                           className="rounded px-2 py-1 text-md flex items-center gap-2 bg-[#DD8888] text-white hover:bg-[#bd5a5a] duration-300"
                         >
                           <p>Remove</p>
