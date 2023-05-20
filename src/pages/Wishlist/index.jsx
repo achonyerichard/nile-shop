@@ -76,8 +76,6 @@ const Wishlist = () => {
   return (
     <>
       <Navigation />
-
-      <section className="md:mt-28 mt-28 w-full px-4 md:px-40 mx-auto grid grid-cols-1 lg:grid-cols-1 md:grid-cols-1  justify-center gap-y-4 md:gap-y-10 gap-x-4   mb-5">
       <ToastContainer
               position="center"
               autoClose={5000}
@@ -90,12 +88,18 @@ const Wishlist = () => {
               pauseOnHover
               theme="dark"
             />
-       <div className="">
-        <header className="pb-2">
+          
+      <section className="md:mt-28 mt-28 w-full px-4 md:px-20  ">
+     
+      <header className="pb-2">
           <h2 className="text-2xl md:text-4xl font-medium text-center text-black ">
             Wishlist Items
           </h2>
         </header>
+        <main  className="md:mt-28 mt-28 w-full px-4 md:px-20  grid grid-cols-1 lg:grid-cols-2 md:grid-cols-2  justify-center gap-y-4 md:gap-y-10 gap-x-4   mb-5">
+
+      
+
         {data?.length > 0 ? (
           <>
             {data?.map((item) => (
@@ -112,22 +116,22 @@ const Wishlist = () => {
                     />
                   </div>
 
-                  <div className="px-4 py-3 w-1/2">
+                  <div className="px-4 py-3 2">
                     <span className="text-gray-400 mr-3 uppercase text-xs">
                       {item?.categoryName}
                     </span>
                     <p className="text-lg font-bold text-black truncate block capitalize">
                       {item?.name}
                     </p>
-                    <div className="md:flex space-y-2 md:space-y-0 items-center justify-between  md:justify-center">
-                      <div className="md:w-1/3">
+                    <div className="md:flex flex-col space-y-2 md:space-y-0 items-center justify-between  md:justify-center">
+                      <div className="">
                         <p className="text-lg font-semibold text-black cursor-auto md:my-3">
                           <span>&#8358;</span>
                           {`${item?.price}`}
                         </p>
                       </div>
 
-                      <div className="flex md:justify-center md:w-1/3">
+                      <div className="flex md:justify-center ">
                         <Link to={`/product/${item?.Productid}`}>
                           <button className="rounded px-2 py-1 text-md flex items-center gap-2 bg-[#DD8888] text-white hover:bg-[#bd5a5a] duration-300">
                             <p>View</p>
@@ -135,7 +139,7 @@ const Wishlist = () => {
                           </button>
                         </Link>
                       </div>
-                      <div className="md:ml-auto md:w-1/3">
+                      <div className="pt-2 ">
                         <button
                           onClick={() => removeItem(item)}
                           disabled={loading}
@@ -158,7 +162,7 @@ const Wishlist = () => {
           </h1>
           </div>
         )}
-        </div>
+        </main>
       </section>
       <Footer />
     </>

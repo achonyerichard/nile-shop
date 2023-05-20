@@ -103,7 +103,7 @@ export const WishListProvider = ({ children }) => {
     })
     .catch((error) => {
       console.log("Errors", error?.response?.data);
-      setError(error.message);
+      setError(error?.response?.data);
     });
    
   }
