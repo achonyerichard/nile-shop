@@ -8,6 +8,7 @@ import AddProductModal from "../../components/Modals/AddProductModal";
 import DeleteModal from "../../components/Modals/DeleteProduct";
 import { ModalsContext } from "../../contexts/modal-context";
 import EditModal from "../../components/Modals/EditProductModal";
+import EditProfile from "../../components/Forms/EditProfile";
 
 const Profile = () => {
   const [filteredData, setFilteredData] = useState([]);
@@ -131,61 +132,9 @@ const Profile = () => {
               </div>
 
               <div className="md:w-1/3 bg-white mt-5 md:mt-0 sticky top-20">
-                <div className="p-4 ">
-                  <header className="flex justify-center py-2">
-                    <h3 className="font-bold text-2xl text-black">
-                      Edit Profile
-                    </h3>
-                  </header>
-                  <form className="flex flex-col" method="POST" action="#">
-                    <div className="mb-6 pt-3 rounded bg-gray-200">
-                      <label
-                        className="block text-gray-700 text-sm font-bold mb-2 ml-3"
-                        htmlFor="email"
-                      >
-                        Full email
-                      </label>
-                      <input
-                        type="text"
-                        id="email"
-                        className="bg-gray-200 rounded w-full text-gray-700 focus:outline-none border-b-4 border-gray-300 focus:border-[#A16161] transition duration-500 px-3 "
-                      />
-                    </div>
-                    <div className="mb-6 pt-3 rounded bg-gray-200">
-                      <label
-                        className="block text-gray-700 text-sm font-bold mb-2 ml-3"
-                        htmlFor="email"
-                      >
-                        Address
-                      </label>
-                      <input
-                        type="text"
-                        id="email"
-                        className="bg-gray-200 rounded w-full text-gray-700 focus:outline-none border-b-4 border-gray-300 focus:border-[#A16161] transition duration-500 px-3 "
-                      />
-                    </div>
-                    <div className="mb-6 pt-3 rounded bg-gray-200">
-                      <label
-                        className="block text-gray-700 text-sm font-bold mb-2 ml-3"
-                        htmlFor="password"
-                      >
-                        Password
-                      </label>
-                      <input
-                        type="password"
-                        id="password"
-                        className="bg-gray-200 rounded w-full text-gray-700 focus:outline-none border-b-4 border-gray-300 focus:border-[#A16161] transition duration-500 px-3 pb-3"
-                      />
-                    </div>
-
-                    <button
-                      className="bg-[#A16161] hover:bg-purple-700 text-white font-bold py-2 rounded shadow-lg hover:shadow-xl transition duration-200"
-                      type="submit"
-                    >
-                      Submit
-                    </button>
-                  </form>
-                </div>
+                
+                 <EditProfile/>
+                
               </div>
             </div>
           </div>

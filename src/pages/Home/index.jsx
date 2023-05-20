@@ -6,9 +6,12 @@ import { useContext, useState } from "react";
 import { ProductsContext } from "../../contexts/products-context";
 import Footer from "../../components/Footer";
 import Navigation from "../../components/Navigation";
+import { CategoryContext } from "../../contexts/categories-context";
+import CategoryPills from "../../components/categoryPills";
 
 const Home = () => {
   const { productData } = useContext(ProductsContext);
+  const { categoryData } = useContext(CategoryContext);
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage] = useState(5);
   console.log(productData);
@@ -21,16 +24,7 @@ const Home = () => {
 
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-  const options = [
-    { name: "All", id: 1 },
-    { name: "Electronics", id: 2 },
-    { name: "Phones", id: 3 },
-    { name: "Accessories", id: 4 },
-    { name: "Games", id: 5 },
-    { name: "Clothes", id: 6 },
-    { name: "Skin Care", id: 7 },
-    { name: "Laptops", id: 8 },
-  ];
+ 
   return (
     <>
     <Navigation/>
@@ -71,35 +65,8 @@ const Home = () => {
         <div className="md:px-20 px-4">
           <div className="w-full max-w-[1920px]  mx-auto ">
             <div className=" md:flex flex-row justify-center  h-full items-stretch lg:gap-4 lg:pt-5 pt-5">
-              <div
-                className="
-                    flex 
-                    md:hidden  
-                    lg:justify-center lg:items-center 
-                    lg:pb-[50px] lg:border-b-[1px]
-                    lg:border-appGreen lg:mb-4"
-              >
-                <div
-                  className={`flex max-w-[1920px] mx-auto overflow-x-auto  lg:flex`}
-                >
-                  {options.map((option) => (
-                    <div
-                      key={option.id}
-                      className={`
-                  whitespace-nowrap
-                  lg:w-fit lg:max-h-[50px] 
-                  lg:h-[50px] border-[1px] 
-                  bg-[#A16161]
-                  text-white
-                  lg:grid lg:place-items-center lg:px-[3rem] px-3 text-xl
-                  rounded-full  mx-[8px] hover:bg-[#DD8888] cursor-pointer hover:text-appWhite focus:bg-[#DD8888]
-                 }`}
-                    >
-                      {option.name}
-                    </div>
-                  ))}
-                </div>
-              </div>
+              <CategoryPills categoryData={categoryData}/>
+            
 
               <div className="   md:w-1/5 bg-white hidden md:block  shadow-xl  ">
                 <div className="  h-screen  top-20 sticky">
@@ -109,7 +76,7 @@ const Home = () => {
                     </h2>
                   </header>
                   <div className="flex justify-center h-72">
-                    <CategoryList options={options} />
+                    <CategoryList categoryData={categoryData} />
                   </div>
                 </div>
               </div>

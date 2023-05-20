@@ -8,20 +8,24 @@ import { ReviewsProvider } from "./contexts/reviews-context.jsx";
 import { WishListProvider } from "./contexts/wishlist-context.jsx";
 import { ModalsProvider } from "./contexts/modal-context.jsx";
 import { AuthContextProvider } from "./contexts/AuthContext.jsx";
+import { CategoryProvider } from "./contexts/categories-context.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
     <AuthContextProvider>
+      <CategoryProvider>
       <ProductsProvider>
         <ReviewsProvider>
           <WishListProvider>
             <ModalsProvider>
+
               <App />
             </ModalsProvider>
           </WishListProvider>
         </ReviewsProvider>
       </ProductsProvider>
+      </CategoryProvider>
       </AuthContextProvider>
     </BrowserRouter>
   </React.StrictMode>

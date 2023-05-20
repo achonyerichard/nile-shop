@@ -291,7 +291,7 @@ const Register = () => {
                 type="submit"
                 disabled={loading}
               >
-                {loading ? "Loading...":"Login"}
+                {loading ? "Loading...":"Register"}
               </button>
             </form>
           </section>
