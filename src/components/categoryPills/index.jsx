@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 
-const CategoryPills = ({ categoryData }) => {
+const CategoryPills = ({ categoryData,filterProductsByCategory,productData,setFilteredProducts }) => {
   return (
     <>
       <div
@@ -13,6 +13,7 @@ const CategoryPills = ({ categoryData }) => {
       >
         <div className={`flex max-w-[1920px] mx-auto overflow-x-auto  lg:flex`}>
           <div
+          onClick={() => setFilteredProducts(productData)}
             className={`
                   whitespace-nowrap
                   lg:w-fit lg:max-h-[50px] 
@@ -27,6 +28,7 @@ const CategoryPills = ({ categoryData }) => {
           </div>
           {categoryData.map((option) => (
             <div
+           
               key={option.id}
               className={`
                   whitespace-nowrap
@@ -38,7 +40,8 @@ const CategoryPills = ({ categoryData }) => {
                   rounded-full  mx-[8px] hover:bg-[#DD8888] cursor-pointer hover:text-appWhite focus:bg-[#DD8888]
                  }`}
             >
-              {option.name}
+                <p  onClick={() => filterProductsByCategory(option)}> {option.name}</p>
+             
             </div>
           ))}
         </div>

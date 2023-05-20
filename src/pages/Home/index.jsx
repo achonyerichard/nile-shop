@@ -10,14 +10,18 @@ import { CategoryContext } from "../../contexts/categories-context";
 import CategoryPills from "../../components/categoryPills";
 
 const Home = () => {
-  const { productData } = useContext(ProductsContext);
+  const { productData,filteredProducts, filterProductsByCategory,setFilteredProducts } = useContext(ProductsContext);
   const { categoryData } = useContext(CategoryContext);
+  console.log(categoryData);
+
+  const displayProducts = filteredProducts.length > 0 ? filteredProducts : productData;
+
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage] = useState(5);
-  console.log(productData);
+
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = productData.slice(
+  const currentProducts = displayProducts.slice(
     indexOfFirstProduct,
     indexOfLastProduct
   );
@@ -65,7 +69,7 @@ const Home = () => {
         <div className="md:px-20 px-4">
           <div className="w-full max-w-[1920px]  mx-auto ">
             <div className=" md:flex flex-row justify-center  h-full items-stretch lg:gap-4 lg:pt-5 pt-5">
-              <CategoryPills categoryData={categoryData}/>
+              <CategoryPills categoryData={categoryData} filterProductsByCategory={filterProductsByCategory} productData={productData} setFilteredProducts={setFilteredProducts}/>
             
 
               <div className="   md:w-1/5 bg-white hidden md:block  shadow-xl  ">
@@ -76,7 +80,7 @@ const Home = () => {
                     </h2>
                   </header>
                   <div className="flex justify-center h-72">
-                    <CategoryList categoryData={categoryData} />
+                    <CategoryList categoryData={categoryData} filterProductsByCategory={filterProductsByCategory} productData={productData} setFilteredProducts={setFilteredProducts}/>
                   </div>
                 </div>
               </div>
