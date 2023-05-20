@@ -35,16 +35,16 @@ const Products = ({ products }) => {
               />
               <div className="px-4 py-3 md:w-72">
                 <span className="text-gray-400 mr-3 uppercase text-xs">
-                  {item.category}
+                  {item?.categoryName}
                 </span>
                 <p className="text-lg font-bold text-black truncate block capitalize">
-                  {item.product}
+                  {item?.name}
                 </p>
                 <div className="md:flex items-center justify-between space-y-3 md:justify-center">
                   <div className="md:w-1/3">
                     <p className={`text-lg font-semibold text-black cursor-auto md:my-3 ${!user &&"blur-sm" }`}>
                       <span>&#8358;</span>
-                      {`${item.price}`}
+                      {`${item?.price}`}
                     </p>
                   </div>
 

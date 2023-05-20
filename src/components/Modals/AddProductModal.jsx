@@ -76,7 +76,7 @@ const AddProductModal = ({ setAddProductModal, addProductModal }) => {
         console.log("Post request, results", result);
 
         setLoading(false);
-        setSuccess("Profile Updated Succesfully");
+        setSuccess("Product Added Succesfully");
         setAddProductModal(false)
       })
       .catch((error) => {
@@ -101,7 +101,7 @@ const AddProductModal = ({ setAddProductModal, addProductModal }) => {
     <>
       {addProductModal && (
         <div className="">
-          <div className="z-50 md:mt-20 font-sans antialiased fixed top-40 md:bottom-0 inset-x-0 px-4 pb-4 sm:inset-0 sm:flex sm:items-center sm:justify-center">
+          <div className="z-50 md:mt-32 font-sans antialiased fixed top-40 md:bottom-0 inset-x-0 px-4 pb-4 sm:inset-0 sm:flex sm:items-center sm:justify-center">
             <ToastContainer
               position="center"
               autoClose={5000}
@@ -128,7 +128,7 @@ const AddProductModal = ({ setAddProductModal, addProductModal }) => {
                 </div>
               </div>
               <div className="bg-white px-10 pt-5 pb-4 sm:p-6 sm:pb-4">
-                <header className="flex justify-center py-2">
+                <header className="flex justify-center pb-2">
                   <h3 className="font-bold text-2xl text-black">Add Product</h3>
                 </header>
                 <form className="flex flex-col" onSubmit={handleSubmit}>
@@ -163,7 +163,7 @@ const AddProductModal = ({ setAddProductModal, addProductModal }) => {
                     >
                       <option value="">Select your Category</option>
                      {data.map((item)=>(
-                      <option key={item?.id} value={item?.name}>{item?.name}</option>
+                      <option key={item?.id} value={item?.id}>{item?.name}</option>
                      )) }
                       
                     </select>

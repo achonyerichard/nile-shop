@@ -2,7 +2,7 @@
 
 import { useState, useEffect, } from "react";
 import { createContext } from "react";
-import getProducts from "../data/products";
+import useApi from "../hooks/useApi";
 
 
 
@@ -35,15 +35,13 @@ export const ProductsProvider = ({ children }) => {
   
     },[filteredProducts])
 
-  useEffect(()=>{
-    const copyData = getProducts()
-   
-    setProductData(copyData)
-    console.log(copyData);
+    const [data] = useApi(
+      "https://caroapp-2sc7.onrender.com/api/product/products"
+    );
+    useEffect(() => {
+      setProductData(data);
+    }, [data]);
   
-  
-    },[])
-    
   
   
   const value = { productData,setProductData,filteredProducts, setFilteredProducts,filterProductsByCategory, };

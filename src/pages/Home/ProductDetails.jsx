@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { ProductsContext } from "../../contexts/products-context";
 import { FaWhatsapp } from "react-icons/fa";
 import ReviewForm from "../../components/Reviews/ReviewForm";
@@ -31,22 +31,23 @@ const ProductDetails = () => {
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   useEffect(() => {
-    const filteredProducts = productData.find(
-      (product) => product?.id === parseInt(id)
+    const filteredProducts = productData.filter(
+      (product) => product?.id === id
     );
-
-    setFilteredData(filteredProducts);
+    console.log("fit", filteredProducts);
+    console.log("fit", productData);
+    setFilteredData(filteredProducts[0]);
   }, [productData, id]);
 
   return (
     <>
-    <Navigation/>
+      <Navigation />
       <div className="py-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center space-x-2 text-gray-400 text-sm">
-            <a href="#" className="hover:underline hover:text-gray-600">
+            <Link to="/" className="hover:underline hover:text-gray-600">
               Home
-            </a>
+            </Link>
             <span>
               <svg
                 className="h-5 w-5 leading-none text-gray-300"
@@ -63,9 +64,9 @@ const ProductDetails = () => {
                 />
               </svg>
             </span>
-            <a href="#" className="hover:underline hover:text-gray-600">
-              {filteredData?.category}
-            </a>
+            <span className="hover:underline hover:text-gray-600">
+              {filteredData?.categoryName}
+            </span>
             <span>
               <svg
                 className="h-5 w-5 leading-none text-gray-300"
@@ -82,7 +83,7 @@ const ProductDetails = () => {
                 />
               </svg>
             </span>
-            <span>{filteredData?.product}</span>
+            <span>{filteredData?.name}</span>
           </div>
         </div>
 
@@ -110,12 +111,12 @@ const ProductDetails = () => {
             </div>
             <div className="md:flex-1 px-4">
               <h2 className="mb-2 leading-tight tracking-tight font-bold text-black text-2xl md:text-3xl">
-                {filteredData?.product}
+                {filteredData?.name}
               </h2>
               <p className="text-gray-500 text-sm">
                 By{" "}
                 <a href="#" className="text-gray-800 hover:underline">
-                  {filteredData?.seller}
+                  {`${filteredData?.firstname} ${filteredData?.lastname}`}
                 </a>
               </p>
 
@@ -134,14 +135,10 @@ const ProductDetails = () => {
           </div> */}
               </div>
 
-              <p className="text-gray-800">
-                Lorem ipsum, dolor sit, amet consectetur adipisicing elit. Vitae
-                exercitationem porro saepe ea harum corrupti vero id laudantium
-                enim, libero blanditiis expedita cupiditate a est.
-              </p>
-<div>
-  <Rating/>
-</div>
+              <p className="text-gray-800">{filteredData?.description}</p>
+              <div>
+                <Rating />
+              </div>
               <div className="md:flex py-4 space-x-4 space-y-4 md:space-y-0 items-center">
                 <button
                   type="button"
@@ -149,14 +146,17 @@ const ProductDetails = () => {
                 >
                   Add to Wishlist
                 </button>
-             
+                <Link
+                  to={`https://wa.me/${filteredData?.number}`}
+                  target="_blank"
+                >
                   <button className="bg-white text-black pl-3 md:pl-6 rounded-full w-auto flex items-center">
                     <span className="mr-6">Contact seller via</span>{" "}
                     <span className="bg-[#25D366] hover:bg-indigo-700 md:w-[50px] md:h-[50px] w-16 h-16 flex items-center justify-center rounded-full">
                       <FaWhatsapp className="text-white text-2xl" />
                     </span>
                   </button>
-                
+                </Link>
               </div>
             </div>
           </div>
@@ -170,7 +170,7 @@ const ProductDetails = () => {
           />
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };

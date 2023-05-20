@@ -1,10 +1,61 @@
 import { FaWindowClose } from "react-icons/fa";
+import axios from "axios"
+import { useEffect, useState } from "react";
+import { useAuthContext } from "../../hooks/useAuthContext";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 
 // eslint-disable-next-line react/prop-types
-const DeleteModal = ({setDeleteModal,deleteModal}) => {
+const DeleteModal = ({setDeleteModal,deleteModal,id}) => {
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const user = useAuthContext();
+  const token = user?.user?.token;
+  async function handleSubmit(e) {
+    setLoading(true);
+    e.preventDefault();
+  
+    await axios
+      .delete(
+        `https://caroapp-2sc7.onrender.com/api/product/delete/${id}`,
+        
+        {
+          headers: {
+            "x-auth-token": token,
+          },
+        }
+      )
+      .then((result) => {
+        console.log("Post request, results", result);
+  
+        setLoading(false);
+        setSuccess("Product Edited Succesfully");
+        setDeleteModal(false)
+      })
+      .catch((error) => {
+        console.log("Errors", error);
+        setError(error.message);
+        setLoading(false);
+      });
+  }
  console.log(deleteModal);
+
+
+ useEffect(() => {
+  if (error) {
+    toast.error(error, {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+  } else if (success) {
+    toast.success(success, {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+  }
+}, [error, success]);
 
     return (
       <>
@@ -14,7 +65,18 @@ const DeleteModal = ({setDeleteModal,deleteModal}) => {
               <div className="fixed inset-0 transition-opacity">
                 <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
               </div>
-  
+              <ToastContainer
+              position="center"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="dark"
+            />
               <div className="bg-white z-50 rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full">
               <div className="relative">
                 <div className="absolute top-0 right-0">
@@ -65,11 +127,11 @@ const DeleteModal = ({setDeleteModal,deleteModal}) => {
                   </span>
                   <span className="mt-3 flex w-full rounded-md shadow-sm sm:mt-0 sm:w-auto">
                     <button
-                      
-                      type="button"
+                      onClick={handleSubmit}
+                     disabled={loading}
                       className="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-green-600 text-white leading-6 font-medium text-gray-700 shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline transition ease-in-out duration-150 sm:text-sm sm:leading-5"
                     >
-                      Approve
+                      Delete
                     </button>
                   </span>
                 </div>

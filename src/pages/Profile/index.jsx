@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { ProductsContext } from "../../contexts/products-context";
 import Navigation from "../../components/Navigation";
@@ -9,10 +9,16 @@ import DeleteModal from "../../components/Modals/DeleteProduct";
 import { ModalsContext } from "../../contexts/modal-context";
 import EditModal from "../../components/Modals/EditProductModal";
 import EditProfile from "../../components/Forms/EditProfile";
+import useApi from "../../hooks/useApi";
 
 const Profile = () => {
-  const [filteredData, setFilteredData] = useState([]);
   const { productData } = useContext(ProductsContext);
+  const [itemId, setItemId] = useState("");
+
+  const [data] = useApi(
+    "https://caroapp-2sc7.onrender.com/api/product/myproducts"
+  );
+  console.log("mine", data);
   const {
     addProductModal,
     setAddProductModal,
@@ -23,13 +29,14 @@ const Profile = () => {
   } = useContext(ModalsContext);
 
   console.log(productData);
-  useEffect(() => {
-    const filteredProducts = productData.filter(
-      (product) => product?.seller === "Richard"
-    );
-    console.log("prods", filteredProducts);
-    setFilteredData(filteredProducts);
-  }, [productData]);
+  const editClick = (id) => {
+    setItemId(id);
+    setEditModal(true);
+  };
+  const deleteClick = (id) => {
+    setItemId(id);
+    setDeleteModal(true);
+  };
 
   return (
     <>
@@ -76,25 +83,25 @@ const Profile = () => {
                     Delete
                   </h3>
                 </div>
-                {filteredData.map((item) => (
+                {data.map((item) => (
                   <div
                     className="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5"
-                    key={item.id}
+                    key={item?.id}
                   >
                     <div className="flex w-1/2">
                       <div className="w-20">
                         <img
                           className="md:h-24 object-cover"
-                          src={item.image}
+                          src={item?.image}
                           alt=""
                         />
                       </div>
                       <div className="flex flex-col  ml-4 md:flex-grow w-1/2">
                         <span className="font-bold text-black text-sm ">
-                          {item.product}
+                          {item?.name}
                         </span>
                         <span className="text-red-500 text-xs ">
-                          {item.category}
+                          {item?.categoryName}
                         </span>
                         <span className="text-gray-500 text-xs ">
                           {item.id}
@@ -105,13 +112,13 @@ const Profile = () => {
                     <span className="text-center w-1/4 font-semibold text-sm flex justify-center">
                       <BiEditAlt
                         className="text-[#A16161] text-2xl cursor-pointer"
-                        onClick={() => setEditModal(true)}
+                        onClick={() => editClick(item?.id)}
                       />
                     </span>
                     <span className="text-center w-1/4 font-semibold text-sm flex justify-center">
                       <RiDeleteBinLine
                         className="text-[#A16161] text-2xl cursor-pointer"
-                        onClick={() => setDeleteModal(true)}
+                        onClick={() => deleteClick(item?.id)}
                       />
                     </span>
                   </div>
@@ -132,9 +139,7 @@ const Profile = () => {
               </div>
 
               <div className="md:w-1/3 bg-white mt-5 md:mt-0 sticky top-20">
-                
-                 <EditProfile/>
-                
+                <EditProfile />
               </div>
             </div>
           </div>
@@ -144,8 +149,8 @@ const Profile = () => {
         setAddProductModal={setAddProductModal}
         addProductModal={addProductModal}
       />
-      <DeleteModal setDeleteModal={setDeleteModal} deleteModal={deleteModal} />
-      <EditModal editModal={editModal} setEditModal={setEditModal} />
+      <DeleteModal setDeleteModal={setDeleteModal} deleteModal={deleteModal} id={itemId}/>
+      <EditModal editModal={editModal} setEditModal={setEditModal} id={itemId}/>
     </>
   );
 };
