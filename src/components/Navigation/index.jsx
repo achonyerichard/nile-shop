@@ -1,15 +1,18 @@
-import { useContext, useState } from "react";
+import {  useState } from "react";
 import { BsFillPersonFill, BsFillBagCheckFill } from "react-icons/bs";
 
 import { Link } from "react-router-dom";
-import { WishListContext } from "../../contexts/wishlist-context";
+
 import { useAuthContext } from "../../hooks/useAuthContext";
 import useLogout from "../../hooks/useLogout";
+import useApi from "../../hooks/useApi";
 
 const Navigation = () => {
   const { user } = useAuthContext();
-
-  const { wishlistItem } = useContext(WishListContext);
+  const [data] = useApi(
+    `https://caroapp-2sc7.onrender.com/api/favourite/mywishlist`
+  );
+ 
   const [profile, setProfile] = useState(false);
   const [nav, setNav] = useState(false);
 
@@ -127,7 +130,7 @@ const Navigation = () => {
 
                   <div className="absolute md:-top-0 -top-3 -right-2 md:right-2">
                     <span className="text-white font-bold text-sm rounded-full ">
-                      {wishlistItem.length}
+                      {data?.length}
                     </span>
                   </div>
                 </div>

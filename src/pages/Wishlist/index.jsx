@@ -6,10 +6,13 @@ import Footer from "../../components/Footer";
 import { FaEye } from "react-icons/fa";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { WishListContext } from "../../contexts/wishlist-context";
+import useApi from "../../hooks/useApi";
 
 const Wishlist = () => {
-  const { wishlistItem, clearItemFromWishList } = useContext(WishListContext);
-
+  const {  clearItemFromWishList } = useContext(WishListContext);
+  const [data] = useApi(
+    `https://caroapp-2sc7.onrender.com/api/favourite/mywishlist`
+  );
   const removeItem = (product) => {
     clearItemFromWishList(product);
   };
@@ -18,18 +21,18 @@ const Wishlist = () => {
       <Navigation />
 
       <section className="md:mt-28 mt-28 w-full px-4 md:px-40 mx-auto grid grid-cols-1 lg:grid-cols-1 md:grid-cols-1  justify-center gap-y-4 md:gap-y-10 gap-x-4   mb-5">
-       <div className="h-screen">
+       <div className="">
         <header className="pb-2">
           <h2 className="text-2xl md:text-4xl font-medium text-center text-black ">
             Wishlist Items
           </h2>
         </header>
-        {wishlistItem.length > 0 ? (
+        {data?.length > 0 ? (
           <>
-            {wishlistItem.map((item) => (
+            {data?.map((item) => (
               <div
                 key={item.id}
-                className="md:w-full bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl "
+                className="md:w-full bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl mb-5"
               >
                 <div className="flex items-center">
                   <div className="w-1/2">
@@ -42,16 +45,16 @@ const Wishlist = () => {
 
                   <div className="px-4 py-3 w-1/2">
                     <span className="text-gray-400 mr-3 uppercase text-xs">
-                      {item.category}
+                      {item?.categoryName}
                     </span>
                     <p className="text-lg font-bold text-black truncate block capitalize">
-                      {item.product}
+                      {item?.name}
                     </p>
                     <div className="md:flex space-y-2 md:space-y-0 items-center justify-between  md:justify-center">
                       <div className="md:w-1/3">
                         <p className="text-lg font-semibold text-black cursor-auto md:my-3">
                           <span>&#8358;</span>
-                          {`${item.price}`}
+                          {`${item?.price}`}
                         </p>
                       </div>
 

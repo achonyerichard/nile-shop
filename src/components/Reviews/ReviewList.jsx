@@ -1,5 +1,8 @@
+
+
 /* eslint-disable react/prop-types */
-const ReviewList = ({reviews}) => {
+const ReviewList = ({data}) => {
+
   return (
     <>
       <div className="  shadow-xl rounded-lg mx-4 md:mx-auto my-10  ">
@@ -7,11 +10,11 @@ const ReviewList = ({reviews}) => {
           <h2 className="text-xl md:text-3xl text-black text-center"> Reviews </h2>
         </header>
         <div className=" items-start px-4 py-6 ">
-         {reviews.map((review)=>(
+         {data.map((review)=>(
             <div key={review.id} className="border-y py-4">
             <div className="flex items-center justify-between pt-2">
               <h2 className="text-lg font-semibold text-black -mt-1">
-                {review.poster}
+                {review?.message}
               </h2>
               <small className="text-sm text-gray-400">22h ago</small>
             </div>

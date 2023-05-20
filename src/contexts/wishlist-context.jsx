@@ -1,6 +1,8 @@
 /* eslint-disable react/prop-types */
 
 import { createContext, useState,useEffect } from "react";
+import axios from "axios";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 
 const addwishlistItem = (wishlistItem, productToAdd) => {
@@ -49,13 +51,18 @@ export const WishListContext = createContext({
   removeItemToWishLlist:() =>{},
   clearItemFromWishList:()=>{},
   wishListTotal:0,
+  error:{},
+  setError:()=>{},
+  success:{},
+  setSuccess:()=>{},
 });
 
 
 
 export const WishListProvider = ({ children }) => {
+  const { user } = useAuthContext();
 
-
+  const token = user?.token;
   const [wishlistItem, setWishlistItem] = useState(() => {
     const storedState = localStorage.getItem('wishlistItems');
     return storedState ? JSON.parse(storedState) :  [] ;
@@ -63,6 +70,8 @@ export const WishListProvider = ({ children }) => {
   const [wishlistCount,setwishlistCount] = useState(0);
   const [wishListTotal,setWishlistTotal] = useState(0)
 
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
 
   useEffect(() => {
    const newwishlistCount = wishlistItem.reduce((total,wishlistItem)=> total + wishlistItem.quantity,0)
@@ -71,11 +80,33 @@ export const WishListProvider = ({ children }) => {
   }  
   , [wishlistItem])
 
-  const addItemToWishLlist = (productToAdd) => {
+  async function addItemToWishLlist (productToAdd)  {
    
     setWishlistItem(addwishlistItem(wishlistItem, productToAdd));
+    await axios
+    .post(
+      `https://caroapp-2sc7.onrender.com/api/favourite/add
+        `,
+      {
+        product: productToAdd.id,
+      },
+      {
+        headers: {
+          "x-auth-token": token,
+        },
+      }
+    )
+    .then((result) => {
+      console.log("Post request, results", result);
+
+      setSuccess("WishList Updated Succesfully");
+    })
+    .catch((error) => {
+      console.log("Errors", error);
+      setError(error.message);
+    });
    
-  };
+  }
   useEffect(() => {
     localStorage.setItem('wishlistItems', JSON.stringify(wishlistItem));
     console.log("ct",wishlistItem);
@@ -105,7 +136,9 @@ export const WishListProvider = ({ children }) => {
     wishlistCount,
     removeItemToWishLlist,
     clearItemFromWishList,
-    wishListTotal
+    wishListTotal,
+    error,
+    success
   };
   return <WishListContext.Provider value={value}>{children}</WishListContext.Provider>;
 };

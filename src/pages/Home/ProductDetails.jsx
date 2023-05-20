@@ -4,29 +4,32 @@ import { ProductsContext } from "../../contexts/products-context";
 import { FaWhatsapp } from "react-icons/fa";
 import ReviewForm from "../../components/Reviews/ReviewForm";
 import ReviewList from "../../components/Reviews/ReviewList";
-import { ReviewsContext } from "../../contexts/reviews-context";
+
 import Pagination from "../../components/pagination/Pagination";
 import Footer from "../../components/Footer";
 import Navigation from "../../components/Navigation";
 import Rating from "../../components/Rating/Rating";
+import useApi from "../../hooks/useApi";
 
 const ProductDetails = () => {
   const { productData } = useContext(ProductsContext);
-  const { reviewsData } = useContext(ReviewsContext);
+
   const { id } = useParams();
   console.log(id);
-  console.log("juju", productData);
-  const [filteredData, setFilteredData] = useState([]);
+  
+  const [filteredData, setFilteredData] = useState({});
+  console.log("juju", filteredData?.numberOfReview);
+  const [data] = useApi(
+    `https://caroapp-2sc7.onrender.com/api/comment/product/${id}`
+  );
+  console.log("comments", data);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [reviewsPerPage] = useState(3);
-  console.log(reviewsData);
+
   const indexOfLastReview = currentPage * reviewsPerPage;
   const indexOfFirstReview = indexOfLastReview - reviewsPerPage;
-  const currentReviews = reviewsData.slice(
-    indexOfFirstReview,
-    indexOfLastReview
-  );
+  const currentReviews = data.slice(indexOfFirstReview, indexOfLastReview);
 
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -137,7 +140,11 @@ const ProductDetails = () => {
 
               <p className="text-gray-800">{filteredData?.description}</p>
               <div>
-                <Rating />
+                <Rating
+                  review={filteredData?.reviews}
+                  amount={filteredData?.numberOfReview}
+                  id={filteredData?.id}
+                />
               </div>
               <div className="md:flex py-4 space-x-4 space-y-4 md:space-y-0 items-center">
                 <button
@@ -161,10 +168,10 @@ const ProductDetails = () => {
             </div>
           </div>
           <ReviewForm filteredData={filteredData} />
-          <ReviewList reviews={currentReviews} />
+          <ReviewList data={currentReviews} />
           <Pagination
             itemsPerPage={reviewsPerPage}
-            total={reviewsData.length}
+            total={data.length}
             paginate={paginate}
             currentPage={currentPage}
           />
