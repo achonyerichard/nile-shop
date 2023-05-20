@@ -102,7 +102,7 @@ export const WishListProvider = ({ children }) => {
       setSuccess("WishList Updated Succesfully");
     })
     .catch((error) => {
-      console.log("Errors", error);
+      console.log("Errors", error?.response?.data);
       setError(error.message);
     });
    
