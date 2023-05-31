@@ -16,6 +16,7 @@ const Home = () => {
     filteredProducts,
     filterProductsByCategory,
     setFilteredProducts,
+    filterProductsBySearch,
   } = useContext(ProductsContext);
   const { categoryData } = useContext(CategoryContext);
 
@@ -35,6 +36,9 @@ const Home = () => {
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+  const handleChange = (item) => {
+    filterProductsBySearch(item);
+  };
   return (
     <>
       <Navigation />{" "}
@@ -65,7 +69,8 @@ const Home = () => {
             <input
               type="search"
               placeholder="Search"
-              className="border-b-2 w-full border-gray-200 py-3 px-7"
+              className="border-b-2 w-full border-gray-200 py-3 px-7 text-gray-800"
+              onChange={(e) => handleChange(e.target.value)}
             />
           </div>
         </div>
