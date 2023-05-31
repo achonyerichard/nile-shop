@@ -68,7 +68,7 @@ const Home = () => {
             </svg>
             <input
               type="search"
-              placeholder="Search"
+              placeholder="Search by category or name ..."
               className="border-b-2 w-full border-gray-200 py-3 px-7 text-gray-800"
               onChange={(e) => handleChange(e.target.value)}
             />
